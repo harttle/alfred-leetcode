@@ -44,8 +44,25 @@ To contribute to this project:
 1. Clone the repository
 2. Make your changes to `alfred_leetcode.py`
 3. Test locally with `python3 cli.py [search term]`
-4. Build the workflow with `./build.sh`
+4. Build the workflow with `./build.sh` for local testing, or with a specific version for release
 5. Submit a pull request
+
+### Building the Workflow
+
+There are two ways to build the workflow:
+
+```bash
+# For local development (uses version 1.0.0-dev)
+./build.sh
+
+# For releases with a specific version number
+./build.sh --version 1.2.3
+
+# Short form also works
+./build.sh -v 1.2.3
+```
+
+This will create an `alfred-leetcode.alfredworkflow` file that can be installed in Alfred.
 
 ## License
 

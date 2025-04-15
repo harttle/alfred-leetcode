@@ -1,16 +1,19 @@
 #!/bin/bash
 set -e
 
-# Determine version - use GITHUB_REF_NAME in CI or hardcoded for local testing
-if [ -n "$GITHUB_REF_NAME" ]; then
-    # In GitHub Actions, the ref name will be the tag (e.g., v1.2.0)
-    # Remove the 'v' prefix if present
-    VERSION=${GITHUB_REF_NAME#v}
-    echo "Building release version: $VERSION (from GitHub CI)"
+# Check for version argument
+if [ "$1" == "--version" ] || [ "$1" == "-v" ]; then
+    if [ -z "$2" ]; then
+        echo "Error: Version argument is missing"
+        echo "Usage: $0 --version VERSION"
+        exit 1
+    fi
+    VERSION="$2"
+    echo "Building release version: $VERSION (manually specified)"
 else
-    # For local development/testing, use hardcoded version
+    # For local development/testing, use default version
     VERSION="1.0.0-dev"
-    echo "Building test version: $VERSION (hardcoded for local development)"
+    echo "Building test version: $VERSION (default for local development)"
 fi
 
 # Output filename

@@ -1,9 +1,12 @@
 name: Release Alfred Workflow
 
 on:
-  push:
-    tags:
-      - 'v*' # Trigger on tags starting with 'v', e.g., v1.0.0
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (X.Y.Z)'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -26,14 +29,15 @@ jobs:
       - name: Build workflow
         run: |
           chmod +x build.sh
-          ./build.sh
+          ./build.sh --version ${{ github.event.inputs.version }}
       
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: alfred-leetcode.alfredworkflow
-          name: Release ${{ github.ref_name }}
+          name: Release ${{ github.event.inputs.version }}
+          tag_name: v${{ github.event.inputs.version }}
           draft: false
           prerelease: false
           generate_release_notes: true 
