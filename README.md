@@ -2,6 +2,10 @@
 
 A powerful Alfred workflow to quickly search and access LeetCode problems.
 
+<div align="center">
+<img width="510" alt="Screenshot 2025-04-16 at 2 14 52 AM" src="https://github.com/user-attachments/assets/dcc48a3f-ba49-4574-a30a-12197d9f0731" />
+</div>
+
 ## Features
 
 - Search LeetCode problems by number (e.g., "1" for "Two Sum")
