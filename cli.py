@@ -13,8 +13,7 @@ def main():
     # Join all arguments as the search query
     query = " ".join(sys.argv[1:])
     
-    # Search LeetCode
-    print(f"Searching LeetCode for: '{query}'")
+    # Search LeetCode without duplicating the logging
     try:
         questions = search_leetcode(query)
         
