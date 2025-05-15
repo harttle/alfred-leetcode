@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import sys
+import ssl
+import certifi
 import json
 import urllib.request
 import urllib.parse
@@ -58,7 +60,8 @@ def search_leetcode(query: str) -> Optional[List[Dict]]:
     print(f"Searching LeetCode for: '{query}'", file=sys.stderr)
     data = json.dumps(graphql_query).encode('utf-8')
     req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-    with urllib.request.urlopen(req) as response:
+    context = ssl.create_default_context(cafile=certifi.where())
+    with urllib.request.urlopen(req, context=context) as response:
         result = json.loads(response.read().decode('utf-8'))
         if 'data' in result and 'problemsetQuestionList' in result['data']:
             questions = result['data']['problemsetQuestionList']['questions']
